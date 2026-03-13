@@ -1,9 +1,4 @@
-import { Breakpoint, FlexProps } from "../components/Flex/types"
-import { getBreakpointValue } from "./getBreakpointValue"
-import { getGapSize } from "./getGapSize"
-import { getSpacingValue } from "./getSpacingValue"
-import { styleSpacing } from "./styleSpacing"
-
+import { Breakpoint, FlexProps } from "../components/Flex/types";
 /**
  * styleFlex Service
  *
@@ -56,65 +51,5 @@ import { styleSpacing } from "./styleSpacing"
  * styleFlex("tablet", props)
  * // Returns: "flex-direction: row;\ngap: var(--core--gap--base);\npadding-top: var(--core--gap--small);\npadding-right: var(--core--gap--base);..."
  */
-export const styleFlex = (breakpoint: Breakpoint, props: FlexProps): string => {
-  const styles: string[] = []
-
-  // Extract values for this specific breakpoint using the helper function
-  const direction = getBreakpointValue(props.direction, breakpoint)
-  const gap = getBreakpointValue(props.gap, breakpoint)
-  const grow = getBreakpointValue(props.grow, breakpoint)
-  const alignItems = getBreakpointValue(props.alignItems, breakpoint)
-  const justifyContent = getBreakpointValue(props.justifyContent, breakpoint)
-  const wrap = getBreakpointValue(props.wrap, breakpoint)
-
-  const spacing = getSpacingValue(props.spacing, breakpoint)
-
-  // Base flex display - only set for mobile breakpoint
-  // Higher breakpoints inherit the flex display value
-  if (breakpoint === "mobile") {
-    styles.push("display: flex;")
-  }
-
-  // Flex direction - controls main axis direction
-  if (direction) {
-    styles.push(`flex-direction: ${direction};`)
-  }
-
-  // Alignment properties
-  if (alignItems) {
-    styles.push(`align-items: ${alignItems};`)
-  }
-
-  if (justifyContent) {
-    styles.push(`justify-content: ${justifyContent};`)
-  }
-
-  // Flex growth - when grow is set, also set flex-basis to 0 for proper behavior
-  if (grow !== undefined) {
-    styles.push(`flex-grow: ${grow};`)
-    styles.push("flex-basis: 0;")
-  }
-
-  // Flex wrap - controls whether items wrap to new lines
-  if (wrap) {
-    styles.push(`flex-wrap: ${wrap};`)
-  }
-
-  // Gap between flex items using CSS Grid gap property
-  if (gap !== undefined) {
-    const gapValue = getGapSize(gap)
-    if (gapValue) {
-      styles.push(`gap: ${gapValue};`)
-    }
-  }
-
-  // Spacing (padding/margin) using the spacing helper
-  if (spacing) {
-    const spacingStyles = styleSpacing(props.mode || "padding", spacing)
-    if (spacingStyles) {
-      styles.push(spacingStyles)
-    }
-  }
-
-  return styles.join("\n")
-}
+export declare const styleFlex: (breakpoint: Breakpoint, props: FlexProps) => string;
+//# sourceMappingURL=styleFlex.d.ts.map

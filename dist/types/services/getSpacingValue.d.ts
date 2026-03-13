@@ -1,7 +1,4 @@
-import { Breakpoint, SpacingDefinition, Spacing, FlexSpacingShorthandType, FlexSpacingResponsiveType } from "../components/Flex/types"
-import { parseSpacingShorthand } from "../utilities/parseSpacingShorthand"
-import { isResponsiveObject } from "./isResponsiveObject"
-
+import { Breakpoint, SpacingDefinition, Spacing } from "../components/Flex/types";
 /**
  * Extracts the SpacingDefinition for a specific breakpoint from a spacing prop
  *
@@ -25,34 +22,5 @@ import { isResponsiveObject } from "./isResponsiveObject"
  * getSpacingValue({ mobile: "base", tablet: null, desktop: "small" }, "tablet") // returns null
  * getSpacingValue({ mobile: "base", desktop: "small large" }, "desktop") // returns { top: "small", right: "large", bottom: "small", left: "large" }
  */
-export const getSpacingValue = (
-  spacing: Spacing | undefined,
-  breakpoint: Breakpoint
-): SpacingDefinition | null | undefined => {
-  if (spacing === undefined) return undefined
-
-  // Handle shorthand string (applies to mobile only)
-  if (typeof spacing === "string") {
-    if (breakpoint === "mobile") {
-      return parseSpacingShorthand(spacing as FlexSpacingShorthandType)
-    }
-    return undefined
-  }
-
-  // Handle responsive object
-  if (isResponsiveObject(spacing)) {
-    const responsiveSpacing = spacing as FlexSpacingResponsiveType
-    const value = responsiveSpacing[breakpoint]
-
-    if (value === null) return null
-    if (value === undefined) return undefined
-
-    if (typeof value === "string") {
-      return parseSpacingShorthand(value as FlexSpacingShorthandType)
-    }
-
-    return undefined
-  }
-
-  return undefined
-}
+export declare const getSpacingValue: (spacing: Spacing | undefined, breakpoint: Breakpoint) => SpacingDefinition | null | undefined;
+//# sourceMappingURL=getSpacingValue.d.ts.map
